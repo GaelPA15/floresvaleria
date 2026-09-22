@@ -1167,12 +1167,274 @@ body::before{
 
 }
 
+
+/* =========================================================
+   CARTA DE ENTRADA
+========================================================= */
+
+.letter-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:22px;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 15%, rgba(255,255,255,.98), transparent 32%),
+        radial-gradient(circle at 14% 18%, rgba(255,235,112,.33), transparent 25%),
+        radial-gradient(circle at 86% 78%, rgba(255,219,74,.25), transparent 30%),
+        linear-gradient(145deg,#fffef8 0%,#fff8d5 48%,#f2d469 100%);
+    transition:opacity 1.15s ease, transform 1.15s ease, filter 1.15s ease;
+}
+
+.letter-overlay::before,
+.letter-overlay::after{
+    content:"✦";
+    position:absolute;
+    color:rgba(212,166,39,.38);
+    font-size:34px;
+    animation:letterSpark 3.2s ease-in-out infinite;
+}
+
+.letter-overlay::before{ left:9%; top:18%; }
+.letter-overlay::after{ right:10%; bottom:16%; animation-delay:1.2s; }
+
+@keyframes letterSpark{
+    0%,100%{ opacity:.18; transform:scale(.7) rotate(0deg); }
+    50%{ opacity:.8; transform:scale(1.15) rotate(20deg); }
+}
+
+.letter-paper{
+    position:relative;
+    width:min(720px,94vw);
+    max-height:90vh;
+    overflow-y:auto;
+    padding:56px 58px 48px;
+    border-radius:7px;
+    background:
+        linear-gradient(rgba(255,255,255,.93),rgba(255,251,234,.97)),
+        repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(170,131,45,.08) 32px);
+    border:1px solid rgba(185,145,50,.23);
+    box-shadow:0 34px 95px rgba(92,63,7,.22), inset 0 0 0 1px rgba(255,255,255,.85);
+    scrollbar-width:thin;
+    scrollbar-color:#d8b75a transparent;
+    animation:letterEnter 1.2s cubic-bezier(.16,.84,.22,1) both;
+}
+
+.letter-paper::-webkit-scrollbar{ width:7px; }
+.letter-paper::-webkit-scrollbar-thumb{ background:#d8b75a; border-radius:10px; }
+
+.letter-paper::before{
+    content:"";
+    position:absolute;
+    inset:16px;
+    border:1px solid rgba(191,151,56,.16);
+    pointer-events:none;
+}
+
+@keyframes letterEnter{
+    from{ opacity:0; transform:translateY(45px) scale(.95) rotate(-1deg); }
+    to{ opacity:1; transform:translateY(0) scale(1) rotate(0deg); }
+}
+
+.letter-kicker{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:10px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:#b68a25;
+    margin-bottom:10px;
+}
+
+.letter-title{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(38px,7vw,62px);
+    line-height:1;
+    font-weight:400;
+    color:#82601b;
+    margin-bottom:8px;
+}
+
+.letter-heart{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    color:#d9a825;
+    font-size:18px;
+    margin-bottom:30px;
+    animation:letterHeart 1.9s ease-in-out infinite;
+}
+
+@keyframes letterHeart{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.28); }
+}
+
+.letter-text{
+    position:relative;
+    z-index:2;
+    min-height:230px;
+    white-space:pre-wrap;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:17px;
+    line-height:1.92;
+    color:#62502e;
+}
+
+.letter-cursor{
+    display:inline-block;
+    color:#c9961f;
+    font-weight:bold;
+    animation:letterBlink .68s steps(1) infinite;
+}
+
+@keyframes letterBlink{ 50%{ opacity:0; } }
+
+.letter-sign{
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+    text-align:right;
+    font-family:Georgia,"Times New Roman",serif;
+    color:#8b6a28;
+    opacity:0;
+    transform:translateY(8px);
+    transition:.7s ease;
+}
+
+.letter-sign.show{ opacity:1; transform:translateY(0); }
+
+.letter-action{
+    position:relative;
+    z-index:3;
+    display:flex;
+    justify-content:center;
+    margin-top:24px;
+    opacity:0;
+    transform:translateY(14px) scale(.96);
+    pointer-events:none;
+    transition:.7s ease;
+}
+
+.letter-action.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+}
+
+.letter-button{
+    border:none;
+    cursor:pointer;
+    padding:14px 30px;
+    border-radius:999px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:16px;
+    font-weight:700;
+    color:#6c4b00;
+    background:linear-gradient(135deg,#fff18a,#ffc933);
+    box-shadow:0 12px 28px rgba(164,112,0,.24), inset 0 1px 0 rgba(255,255,255,.7);
+    transition:transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    animation:buttonGlow 2.1s ease-in-out infinite;
+}
+
+.letter-button:hover{
+    transform:translateY(-2px) scale(1.06);
+    box-shadow:0 16px 34px rgba(164,112,0,.32), inset 0 1px 0 rgba(255,255,255,.8);
+    filter:brightness(1.03);
+}
+
+.letter-button:active{
+    transform:scale(.98);
+}
+
+@keyframes buttonGlow{
+    0%,100%{ box-shadow:0 12px 28px rgba(164,112,0,.22), 0 0 0 0 rgba(255,214,64,.24); }
+    50%{ box-shadow:0 15px 32px rgba(164,112,0,.30), 0 0 0 9px rgba(255,214,64,0); }
+}
+
+.letter-overlay.hide-letter{
+    opacity:0;
+    transform:scale(1.035);
+    filter:blur(10px);
+    pointer-events:none;
+}
+
+/* Las flores esperan a que termine la carta */
+.flower-stage{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(45px) scale(.92);
+    filter:blur(8px);
+}
+
+.flower-stage.show-flowers{
+    visibility:visible;
+    animation:revealFlowers 1.9s cubic-bezier(.16,.84,.22,1) forwards;
+}
+
+/* El ramo no empieza a moverse hasta que termina la carta */
+.flower-stage:not(.show-flowers) *,
+.flower-stage:not(.show-flowers){
+    animation-play-state:paused !important;
+}
+
+.flower-stage.show-flowers,
+.flower-stage.show-flowers *{
+    animation-play-state:running;
+}
+
+@keyframes revealFlowers{
+    0%{ opacity:0; transform:translateY(45px) scale(.92); filter:blur(8px); }
+    100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+}
+
+@media(max-width:600px){
+    .letter-overlay{ padding:12px; }
+    .letter-paper{ width:100%; max-height:93vh; padding:40px 26px 36px; }
+    .letter-text{ font-size:15.5px; line-height:1.82; min-height:200px; }
+    .letter-heart{ margin-bottom:23px; }
+}
+
 </style>
 </head>
 
 
 
 <body>
+
+<!-- ======================================================
+     CARTA ANTES DE LAS FLORES
+======================================================= -->
+<div class="letter-overlay" id="letterOverlay">
+    <section class="letter-paper" id="letterPaper">
+        <div class="letter-kicker">una carta para ti</div>
+        <h1 class="letter-title">Valeria</h1>
+        <div class="letter-heart">♥</div>
+        <div class="letter-text"><span id="letterText"></span><span class="letter-cursor" id="letterCursor">|</span></div>
+        <div class="letter-sign" id="letterSign">Con muchísimo amor, para ti. 💛</div>
+
+        <div class="letter-action" id="letterAction">
+            <button class="letter-button" id="letterButton" type="button">Click aquí 💛</button>
+        </div>
+    </section>
+</div>
+
+<!-- TODO EL RAMO ORIGINAL -->
+<div class="flower-stage" id="flowerStage">
+
 
 
 <!-- ======================================================
@@ -2009,10 +2271,9 @@ Valeria
 </div>
 
 <p>
-Discúlpame porque esta vez no pude darte estas flores en persona, mi amor, pero sabes que siempre voy a buscar la manera de hacerte llegar un pedacito de lo que siento por ti, aunque sea de una forma diferente. Quise hacerte estas nubecitas amarillas con muchísimo cariño, pensando en ti y esperando que te saquen aunque sea una sonrisita. Te amo demasiado y espero de corazón que te gusten. Con muchísimo amor, para ti. 💛
-
+No pude ponértelas hoy en tus manos, así que encontré otra forma de hacerlas llegar hasta ti.
 <br><br>
-
+Te amo demasiado. 💛
 </p>
 
 </div>
@@ -2023,5 +2284,77 @@ Discúlpame porque esta vez no pude darte estas flores en persona, mi amor, pero
 </div>
 
 
+
+</div>
+<!-- FIN flower-stage -->
+
+<script>
+const carta = `Mi amor...
+
+La verdad es que yo no sabía que el 21 de septiembre era el día de regalar flores amarillas, y cuando me enteré me dio mucha tristeza no haberlo sabido antes, porque de haberlo sabido habría buscado desde el primer momento la forma de tener un detalle contigo.
+
+No quiero que pienses que por no haberlo sabido significa que no pensé en ti o que no me importa hacerte sentir especial, porque es todo lo contrario. A pesar de todo lo que hemos vivido, de los momentos bonitos y también de los que nos han costado más, hay algo que sigue siendo completamente sincero en mí, te amo demasiado.
+
+Sé que no siempre hago las cosas de la mejor manera. A veces me equivoco, a veces llego tarde a ciertos detalles y hay cosas que quisiera haber hecho diferente contigo. Pero cuando se trata de ti, siempre intento encontrar una forma, porque no hay cosa que no haría por ti.
+
+Eres demasiado importante para mí y me nace demostrarte lo mucho que significas para mí, incluso cuando las circunstancias no son exactamente como quisiera.
+
+Tal vez hoy no pueda llegar hasta ti con un ramo, pero eso no significa que no pueda buscar otra manera de darte flores. Cuando me enteré de esto te lo juro me senti mal pero aun asi pense en ti, y quise hacer algo bonito, algo que naciera desde lo que siento, con cariño, con amor y pensando solamente en ti.
+
+Perdóname por las veces en las que me he equivocado contigo, por aquello que pude haber hecho mejor y por esos momentos en los que quizá no supe demostrarte correctamente todo lo que significas para mí.
+
+Te amo demasiado, Valeria.
+
+Y estas sí son para ti. 💛`;
+
+const letterText = document.getElementById('letterText');
+const letterCursor = document.getElementById('letterCursor');
+const letterOverlay = document.getElementById('letterOverlay');
+const letterPaper = document.getElementById('letterPaper');
+const letterSign = document.getElementById('letterSign');
+const letterAction = document.getElementById('letterAction');
+const letterButton = document.getElementById('letterButton');
+const flowerStage = document.getElementById('flowerStage');
+
+let indice = 0;
+const velocidad = 14;
+
+function escribirCarta(){
+    if(indice < carta.length){
+        letterText.textContent += carta.charAt(indice);
+        indice++;
+
+        // La carta baja sola para que siempre se vea lo último que se escribe.
+        letterPaper.scrollTop = letterPaper.scrollHeight;
+
+        let pausa = velocidad;
+        const ultimo = carta.charAt(indice - 1);
+        if(ultimo === '.' || ultimo === ',' || ultimo === '\n') pausa = 42;
+
+        setTimeout(escribirCarta, pausa);
+    }else{
+        letterCursor.style.display = 'none';
+        letterSign.classList.add('show');
+        letterAction.classList.add('show');
+        letterPaper.scrollTop = letterPaper.scrollHeight;
+    }
+}
+
+function mostrarFlores(){
+    letterButton.disabled = true;
+    letterOverlay.classList.add('hide-letter');
+
+    setTimeout(() => {
+        letterOverlay.style.display = 'none';
+        flowerStage.classList.add('show-flowers');
+    }, 1150);
+}
+
+letterButton.addEventListener('click', mostrarFlores);
+
+setTimeout(escribirCarta, 900);
+</script>
+
 </body>
+
 </html>

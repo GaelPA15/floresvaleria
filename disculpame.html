@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>¿Me disculpas? 💛</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family: "Segoe UI", Arial, sans-serif;
+
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(255,255,255,.95),
+          transparent 40%
+        ),
+        linear-gradient(
+          135deg,
+          #fffdf4,
+          #fff3b8,
+          #ffe17a
+        );
+    }
+
+    /* FONDO DE LUCES */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 2px, transparent 2px);
+
+      background-size: 55px 55px;
+
+      opacity: .35;
+
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+
+      width: min(92%, 520px);
+
+      padding: 45px 30px 38px;
+
+      text-align: center;
+
+      background: rgba(255,255,255,.76);
+
+      backdrop-filter: blur(12px);
+
+      border: 1px solid rgba(255,255,255,.8);
+
+      border-radius: 32px;
+
+      box-shadow:
+        0 30px 70px rgba(136, 99, 13, .18);
+
+      z-index: 2;
+
+      animation: aparecer 1s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* FOTO */
+    .kitty {
+      width: 190px;
+      height: 190px;
+
+      object-fit: contain;
+
+      margin-bottom: 18px;
+
+      filter:
+        drop-shadow(0 12px 12px rgba(138, 99, 13, .15));
+
+      animation: flotar 3s ease-in-out infinite;
+    }
+
+    @keyframes flotar {
+      0%, 100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(1deg);
+      }
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: clamp(38px, 8vw, 56px);
+
+      font-weight: 500;
+
+      color: #8b681c;
+
+      margin-bottom: 13px;
+    }
+
+    .texto {
+      max-width: 400px;
+
+      margin: 0 auto 30px;
+
+      font-size: 15px;
+
+      line-height: 1.7;
+
+      color: #7e6b40;
+    }
+
+    /*
+      AQUÍ PONES TU TEXTO
+      ENTRE LOS PARÉNTESIS
+    */
+    .texto::before {
+      content: "(";
+    }
+
+    .texto::after {
+      content: ")";
+    }
+
+    .buttons-area {
+      position: relative;
+
+      width: 100%;
+      height: 140px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 25px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      padding: 15px 34px;
+
+      border-radius: 999px;
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        left .15s ease,
+        top .15s ease;
+
+      user-select: none;
+    }
+
+    #si {
+      position: relative;
+      z-index: 10;
+
+      color: #614200;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffe96a,
+          #ffc928
+        );
+
+      box-shadow:
+        0 10px 25px
+        rgba(181, 130, 0, .25);
+    }
+
+    #si:hover {
+      transform: scale(1.08);
+    }
+
+    #no {
+      position: absolute;
+
+      left: calc(50% + 40px);
+      top: 46px;
+
+      z-index: 20;
+
+      color: #777;
+
+      background: #eeeeee;
+
+      box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.10);
+    }
+
+    .corazon {
+      position: absolute;
+
+      color: rgba(231, 177, 20, .40);
+
+      animation: subir 8s linear infinite;
+
+      pointer-events: none;
+    }
+
+    .c1 {
+      left: 8%;
+      bottom: -30px;
+      font-size: 22px;
+      animation-delay: 0s;
+    }
+
+    .c2 {
+      left: 25%;
+      bottom: -30px;
+      font-size: 13px;
+      animation-delay: -3s;
+    }
+
+    .c3 {
+      left: 72%;
+      bottom: -30px;
+      font-size: 20px;
+      animation-delay: -6s;
+    }
+
+    .c4 {
+      left: 90%;
+      bottom: -30px;
+      font-size: 15px;
+      animation-delay: -1s;
+    }
+
+    @keyframes subir {
+      from {
+        transform:
+          translateY(0)
+          rotate(0deg);
+
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      to {
+        transform:
+          translateY(-110vh)
+          rotate(180deg);
+
+        opacity: 0;
+      }
+    }
+
+    @media(max-width: 500px) {
+      .container {
+        padding: 32px 20px 25px;
+      }
+
+      .kitty {
+        width: 160px;
+        height: 160px;
+      }
+
+      .buttons-area {
+        height: 170px;
+      }
+
+      button {
+        padding: 14px 27px;
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <span class="corazon c1">♥</span>
+  <span class="corazon c2">♥</span>
+  <span class="corazon c3">♥</span>
+  <span class="corazon c4">♥</span>
+
+
+  <main class="container">
+
+    <!-- FOTO -->
+    <img
+      src="kittyflor.png"
+      alt="Kitty con flores"
+      class="kitty"
+    >
+
+
+    <h1>¿Me disculpas?</h1>
+
+
+    <!--
+      CAMBIA SOLAMENTE ESTE TEXTO
+    -->
+    <p class="texto">
+      disculpame por el link nada que ver, te amo
+    </p>
+
+
+    <div class="buttons-area" id="area">
+
+      <button id="si">
+        Sí 💛
+      </button>
+
+      <button id="no">
+        No
+      </button>
+
+    </div>
+
+  </main>
+
+
+<script>
+
+  const botonNo = document.getElementById("no");
+  const botonSi = document.getElementById("si");
+  const area = document.getElementById("area");
+
+  let escalaSi = 1;
+
+
+  /* =========================
+     MOVER BOTÓN NO
+  ========================== */
+
+  function moverNo() {
+
+    const areaRect = area.getBoundingClientRect();
+    const botonRect = botonNo.getBoundingClientRect();
+
+    const maxX =
+      areaRect.width -
+      botonRect.width;
+
+    const maxY =
+      areaRect.height -
+      botonRect.height;
+
+
+    const nuevaX =
+      Math.random() * maxX;
+
+    const nuevaY =
+      Math.random() * maxY;
+
+
+    botonNo.style.left =
+      nuevaX + "px";
+
+    botonNo.style.top =
+      nuevaY + "px";
+
+
+    /* HACER MÁS GRANDE EL SÍ */
+
+    escalaSi += 0.18;
+
+    botonSi.style.transform =
+      `scale(${escalaSi})`;
+
+  }
+
+
+  /*
+    SI INTENTA PASAR EL MOUSE
+    POR EL BOTÓN NO
+  */
+
+  botonNo.addEventListener(
+    "mouseenter",
+    moverNo
+  );
+
+
+  /*
+    PARA CELULAR:
+    SE MUEVE ANTES DE QUE
+    PUEDA TOCARLO
+  */
+
+  botonNo.addEventListener(
+    "touchstart",
+    function(event) {
+
+      event.preventDefault();
+
+      moverNo();
+
+    },
+    {
+      passive: false
+    }
+  );
+
+
+  /*
+    SI DE ALGÚN MODO LOGRA
+    HACER CLICK, TAMBIÉN HUYE
+  */
+
+  botonNo.addEventListener(
+    "click",
+    function(event) {
+
+      event.preventDefault();
+
+      moverNo();
+
+    }
+  );
+
+
+  /* =========================
+     BOTÓN SÍ
+  ========================== */
+
+  botonSi.addEventListener(
+    "click",
+    function() {
+
+      /*
+        ESTA ES LA PÁGINA
+        DE LAS FLORES
+      */
+
+      window.location.href =
+        "index.html";
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
